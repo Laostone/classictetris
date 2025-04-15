@@ -22,13 +22,13 @@ namespace ClassicTetris
         // Start is called before the first frame update
         void Start()
         {
-            Block.OnAnyBlockSteady += GenerateSecondBlock;
+            GridManager.OnAllClearLineAction += GenerateSecondBlock;
             Block.OnGameOver += GameEndSettlement;
         }
 
         void OnDestroy()
         {
-            Block.OnAnyBlockSteady -= GenerateSecondBlock;
+            GridManager.OnAllClearLineAction -= GenerateSecondBlock;
             Block.OnGameOver -= GameEndSettlement;
         }
 

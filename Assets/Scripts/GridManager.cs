@@ -7,15 +7,16 @@ namespace ClassicTetris
     public class GridManager : MonoBehaviour
     {
         public static event System.Action OnAnyClearLine;
+        public static event System.Action OnAllClearLineAction;
 
         public delegate void OnAllClearLineHandler(int y);
         public static event OnAllClearLineHandler OnAllClearLine;
 
-        private float minX = -2.25f; //����ǰ��ȷ���������С��(0,0)�ǵ�ͼ���ĵ�,����ӳ���������
-        private float minY = -4.75f; //����ǰ��ȷ���������С��(0,0)�ǵ�ͼ���ĵ�,����ӳ���������
+        private float minX = -2.25f; 
+        private float minY = -4.75f; 
         private int height = 20;
         private const int width = 10;
-        private const int _height = 22; //����ʵ�ʸ߶�
+        private const int _height = 22; 
 
         private float blockFallDistanceInterval = 0.5f;
 
@@ -78,6 +79,7 @@ namespace ClassicTetris
             return true;
         }
 
+        /*
         private void CheckAndClearLines()
         {
             int linesCleared = 0;
@@ -92,7 +94,36 @@ namespace ClassicTetris
                 }
             }
             OnAllClearLine?.Invoke(linesCleared);
+            OnAllClearLineAction?.Invoke();
         }
+        */
+
+        
+        IEnumerator CheckAndClearLines()
+        {
+            int linesCleared = 0;
+            for (int y = 0; y < height; y++)
+            {
+                if (IsLineFull(y))
+                {
+                    StartCoroutine(ClearLine(y));
+                    yield return new WaitForSeconds(0.3f);
+                    MoveLinesDown(y);
+                    y--;
+                    linesCleared++;
+                }
+            }
+            OnAllClearLine?.Invoke(linesCleared);
+            OnAllClearLineAction?.Invoke();
+        }
+
+        void HandleTyping()
+        {
+            StartCoroutine(CheckAndClearLines());
+        }
+        
+        
+
 
         private bool IsLineFull(int y)
         {
@@ -106,12 +137,27 @@ namespace ClassicTetris
             return true;
         }
 
+        /*
         private void ClearLine(int y)
         {
             for (int x = 0; x < width; x++)
             {
+                map[x, y].gameObject.transform.localScale = new Vector3(0, 0, 0);
                 Destroy(map[x, y].gameObject);
                 map[x, y] = null;
+            }
+            OnAnyClearLine?.Invoke();
+        }
+        */
+
+        IEnumerator ClearLine(int y)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                map[x, y].gameObject.transform.localScale = new Vector3(0, 0, 0);
+                Destroy(map[x, y].gameObject);
+                map[x, y] = null;
+                yield return new WaitForSeconds(0.025f);
             }
             OnAnyClearLine?.Invoke();
         }
@@ -135,12 +181,14 @@ namespace ClassicTetris
         // Start is called before the first frame update
         void Start()
         {
-            Block.OnAnyBlockSteady += CheckAndClearLines;
+            Block.OnAnyBlockSteady += HandleTyping;
+            //Block.OnAnyBlockSteady += CheckAndClearLines;
         }
 
         void OnDestroy()
         {
-            Block.OnAnyBlockSteady -= CheckAndClearLines;
+            Block.OnAnyBlockSteady -= HandleTyping;
+            //Block.OnAnyBlockSteady -= CheckAndClearLines;
         }
 
         // Update is called once per frame

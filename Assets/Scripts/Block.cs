@@ -114,7 +114,8 @@ namespace ClassicTetris
         {
             if (!(GridManager.Instance.IsValidPos(this))) 
             {
-                Debug.Log("ÓÎÏ·½áÊø");
+                Destroy(this.gameObject);
+                Debug.Log("ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½");
                 OnGameOver?.Invoke();
             }
         }
