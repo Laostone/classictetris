@@ -8,6 +8,7 @@ namespace ClassicTetris
     {
         public AudioClip blockhold;
         public AudioClip click;
+        public AudioClip eliminateBlocks;
         private AudioSource audioSource;
         private static AudioManager _instance;
         public static AudioManager Instance
@@ -41,21 +42,29 @@ namespace ClassicTetris
         void Start()
         {
             Block.OnAnyBlockSteady += PlayBlockHoldSound;
-        }
-
-        void Update()
-        {
-
+            Block.OnAnyBlockSteady += PlayLineClearSound;
         }
 
         void OnDestroy()
         {
             Block.OnAnyBlockSteady -= PlayBlockHoldSound;
+            Block.OnAnyBlockSteady -= PlayLineClearSound;
         }
 
         private void PlayBlockHoldSound()
         {
-            audioSource.PlayOneShot(blockhold);
+            if(!(GridManager.Instance.IsHaveFullLine()))
+            {
+                audioSource.PlayOneShot(blockhold);
+            }
+        }
+
+        private void PlayLineClearSound()
+        {
+            if(GridManager.Instance.IsHaveFullLine())
+            {
+                audioSource.PlayOneShot(eliminateBlocks);
+            }
         }
 
         public void PlayClick()

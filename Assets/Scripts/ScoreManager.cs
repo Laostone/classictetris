@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
         savePath = Path.Combine(Application.persistentDataPath, "highscores.json");
     }
 
-    private string savePath; // ´æ´¢Â·¾¶
+    private string savePath; 
     [System.Serializable]
     public class HighScoreEntry
     {
@@ -57,25 +57,23 @@ public class ScoreManager : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("¼ÓÔØÊ§°Ü: " + e.Message);
+            Debug.LogError("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: " + e.Message);
             return new HighScoreList();
         }
     }
 
-    // ±£´æµ½ÎÄ¼þ
     private void SaveScores(HighScoreList data)
     {
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(savePath, json); // ¸²¸ÇÐ´Èë
+        File.WriteAllText(savePath, json); 
     }
 
-    // Ìí¼ÓÐÂ³É¼¨
+    
     public void AddNewScore(string name, int score)
     {
         HighScoreList list = LoadScores();
         list.entries.Add(new HighScoreEntry { playerName = name, score = score });
 
-        // ÅÅÐò²¢±£ÁôÇ°10
         list.entries = list.entries
             .OrderByDescending(entry => entry.score)
             .Take(10)
@@ -95,14 +93,14 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+
     void Start()
     {
         InitializeArchiveFile();
     }
 
 
-    // Update is called once per frame
+
     void Update()
     {
         

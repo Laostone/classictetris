@@ -17,6 +17,16 @@ namespace ClassicTetris
         private static float _timer = 0f;
         private static float _timer1 = 0f;
 
+        void Start()
+        {
+            IsGameOver();
+        }
+
+        void Update()
+        {
+            BlockFalling();
+            BlockMove();
+        }
 
         public void BlockFalling()
         {
@@ -115,23 +125,8 @@ namespace ClassicTetris
             if (!(GridManager.Instance.IsValidPos(this))) 
             {
                 Destroy(this.gameObject);
-                Debug.Log("��Ϸ����");
                 OnGameOver?.Invoke();
             }
-        }
-
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            IsGameOver();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            BlockFalling();
-            BlockMove();
         }
     }
 }

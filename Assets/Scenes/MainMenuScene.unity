@@ -1776,6 +1776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockhold: {fileID: 8300000, guid: 943a9b94f9579e6438afa4581ca6be1c, type: 3}
   click: {fileID: 8300000, guid: b6ef354deae7a4b4e8fd3a0896c84c7e, type: 3}
+  eliminateBlocks: {fileID: 0}
 --- !u!4 &335556361
 Transform:
   m_ObjectHideFlags: 0
