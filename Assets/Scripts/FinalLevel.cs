@@ -9,7 +9,6 @@ namespace ClassicTetris
     {
         public TMP_Text level;
 
-        // Update is called once per frame
         void Update()
         {
             level.text = "" + Score.level;

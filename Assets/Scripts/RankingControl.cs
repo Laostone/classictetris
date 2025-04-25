@@ -33,27 +33,16 @@ namespace ClassicTetris
             AudioManager.Instance.PlayClick();
         }
 
-        /*
-        public void ToggleCanvas()
-        {
-            // 切换 Canvas 的激活状态
-            rankingCanvas.SetActive(!rankingCanvas.activeSelf);
-            UpdateRanking();
-        }
-        */
-
         void OnEnable()
         {
-            UpdateRanking(); // 每次激活时刷新数据
+            UpdateRanking();
         }
 
-        // Start is called before the first frame update
         void Start()
         {
             UpdateRanking();
         }
 
-        // Update is called once per frame
         void Update()
         {
 

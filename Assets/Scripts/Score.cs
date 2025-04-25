@@ -37,6 +37,14 @@ namespace ClassicTetris
         public static int Eliminate = 0;
         public static int level = 0;
 
+        public static int iCount = 0;
+        public static int jCount = 0;
+        public static int lCount = 0;
+        public static int oCount = 0;
+        public static int sCount = 0;
+        public static int tCount = 0;
+        public static int zCount = 0;
+
 
         private void UpGrade()
         {
@@ -75,6 +83,13 @@ namespace ClassicTetris
             score = 0;
             Eliminate = 0;
             level = 0;
+            iCount = 0;
+            jCount = 0;
+            lCount = 0;
+            oCount = 0;
+            sCount = 0;
+            tCount = 0;
+            zCount = 0;
         }
 
         public bool IsBreakRecord()

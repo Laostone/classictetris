@@ -82,22 +82,22 @@ namespace ClassicTetris
 
         private void BlockMove()
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(SettingManager.Instance.leftKey))
             {
                 BlockMoveLeft();
             }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(SettingManager.Instance.rightKey))
             {
                 BlockMoveRight();
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(SettingManager.Instance.rotateKey))
             {
                 BlockRotate();
             }
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(SettingManager.Instance.downKey))
             {
                 if (Time.time - _timer1 >= 0.05f)
                 {

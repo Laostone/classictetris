@@ -25,6 +25,8 @@ namespace ClassicTetris
         public void ClickReturnToMenu()
         {
             SceneManager.LoadScene(0);
+            Score.ResetScore();
+            Block.ResetTime();
         }
 
         public void PlaytheSound()
@@ -32,13 +34,11 @@ namespace ClassicTetris
             AudioManager.Instance.PlayClick();
         }
 
-        // Start is called before the first frame update
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
         {
 

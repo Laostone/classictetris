@@ -9,6 +9,8 @@ namespace ClassicTetris
     {
         [SerializeField]
         private GameObject rankingCanvas;
+        [SerializeField]
+        private GameObject optionCanvas;
 
         public void ClickStartButton()
         {
@@ -18,6 +20,11 @@ namespace ClassicTetris
         public void ClickRankingButton()
         {
             rankingCanvas.SetActive(!rankingCanvas.activeSelf);
+        }
+        
+        public void ClickOptionButton()
+        {
+            optionCanvas.SetActive(!optionCanvas.activeSelf);
         }
         
         public void ClickExitButton()

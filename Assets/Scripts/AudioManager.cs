@@ -72,6 +72,11 @@ namespace ClassicTetris
             audioSource.PlayOneShot(click);
         }
 
+        public void SetVolume(float value)
+        {
+            audioSource.volume = value;
+        }
+
     }
 }
 
